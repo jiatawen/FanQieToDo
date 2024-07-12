@@ -133,7 +133,7 @@ interface menuIconDemo {
 }
 
 /**
- * menu菜单栏
+ * menu菜单栏（三栏）
  */
 @Builder
 export function menu() {

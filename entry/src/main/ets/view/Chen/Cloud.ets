@@ -1,5 +1,6 @@
 @Entry
 @Component
+//云存储页面
 struct Cloud {
   build() {
     Column({ space: 40 }) {

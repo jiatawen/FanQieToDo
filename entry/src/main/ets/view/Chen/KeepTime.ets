@@ -1,5 +1,6 @@
 @Component
 struct KeepTimeDemo {
+  //专注计时核心设置
   @BuilderParam KeepTimeToggle: () => void = this.KeepTimeDefault
 
   @Builder
