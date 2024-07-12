@@ -1,16 +1,15 @@
 import { Mine } from '../view/Chen/Mine'
 
-
 @Entry
 @Component
 struct Index {
-  @State selectedIndex: number = 0    //被选中的标签号
+  @State selectedIndex: number = 0 //被选中的标签号
   tabBarsText: string[] = ['待办', '待办集', '统计数据', '我的'] //标签名
-  tabBarsImg:ResourceStr[] = [$r('app.media.ic_help'),$r('app.media.ic_help'),$r('app.media.ic_help'),$r('app.media.ic_help')]    //标签图标
+  tabBarsImg: ResourceStr[] = [$r('app.media.ic_help'), $r('app.media.ic_help'), $r('app.media.ic_help'), $r('app.media.ic_help')] //标签图标
 
   //标签模板
   @Builder
-  TabDefault(TabIndex:number) {
+  TabDefault(TabIndex: number) {
     Column({ space: 7 }) {
       Image(this.tabBarsImg[TabIndex])
         .width(20)
@@ -46,4 +45,9 @@ struct Index {
       this.selectedIndex = index
     })
   }
+
+
+  //通用模板
+
+
 }

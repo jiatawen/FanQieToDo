@@ -1,3 +1,4 @@
+@Entry
 @Component
 struct KeepTimeDemo {
   @BuilderParam KeepTimeToggle: () => void = this.KeepTimeDefault
@@ -33,7 +34,7 @@ struct KeepTimeDemo {
 }
 
 
-@Entry
+
 @Component
 struct KeepTime {
   @Builder
@@ -74,7 +75,7 @@ struct KeepTime {
             Column({ space: 10 }){
               this.SettingType('基础设置')
               KeepTimeDemo(){}
-              KeepTimeDemo(){}
+              KeepTimeDemo({title:'默认背景音乐|白噪音',content:'舒缓悠扬的音乐让您更加高效'}){}
               KeepTimeDemo(){this.TimeText('5分钟')}
               KeepTimeDemo(){}
             }
