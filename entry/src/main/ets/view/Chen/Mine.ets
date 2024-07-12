@@ -1,10 +1,8 @@
 import * as template from './template'
-
-
 /**
  * 我的页面
  */
-@Entry
+@Preview
 @Component
 export struct Mine {
   build() {
@@ -13,11 +11,11 @@ export struct Mine {
       Scroll() {
         //主体页面
         Column({ space: 5 }) {
+          //顶部
           Column() {
             template.userTable(200)
             template.menu()
           }
-
           //vip
           Column() {
             ForEach(Array.from({ length: 2 }), (a: string, index) => {

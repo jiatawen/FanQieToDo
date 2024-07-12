@@ -1,24 +1,25 @@
+import router from '@ohos.router';
 // 季度卡购买页面
 @Entry
 @Component
 struct Vip {
   @Builder
-  VipTab(){
-    Column({space:5}){
+  VipTab() {
+    Column({ space: 5 }) {
       Text('标题为什么要那么长啊')
         .fontSize(15)
         .fontWeight(700)
         .maxLines(1)
-        .textOverflow({overflow:TextOverflow.Clip})
+        .textOverflow({ overflow: TextOverflow.Clip })
       Text('正文盎司附近了\nask发了哈士大夫爱上了发哈首府拉萨loremask附近的哈桑劳动防护阿斯利康发哈士大夫爱上了发卡行数量ask发了哈黑暗势力开发')
         .fontColor('#929292')
         .fontSize(11)
         .maxLines(2)
-        .textOverflow({overflow:TextOverflow.Clip})
+        .textOverflow({ overflow: TextOverflow.Clip })
     }
     .alignItems(HorizontalAlign.Start)
     .width('90%')
-    .margin({bottom:20})
+    .margin({ bottom: 20 })
   }
 
   build() {
@@ -27,6 +28,9 @@ struct Vip {
       Row() {
         Image($r('app.media.ic_close'))
           .width(25)
+          .onClick(() => {
+            router.back()
+          })
         Text('番茄ToDo季度卡')
           .fontWeight(700)
           .fontSize(20)
@@ -62,7 +66,7 @@ struct Vip {
       .borderRadius(20)
 
       //点击购买
-      Column({space:5}) {
+      Column({ space: 5 }) {
         Text('点击购买 ￥9.99 三个月 原价 ￥18')
           .fontColor('#fff')
           .fontSize(15)
@@ -85,12 +89,12 @@ struct Vip {
         .padding(2)
         .textAlign(TextAlign.Center)
         .borderRadius(15)
-        .margin({top:5})
+        .margin({ top: 5 })
 
       //滚动区
-      Scroll(){
-        Column(){
-          ForEach(Array.from({length:30}),()=>{
+      Scroll() {
+        Column() {
+          ForEach(Array.from({ length: 30 }), () => {
             this.VipTab()
           })
         }
@@ -99,7 +103,7 @@ struct Vip {
       .height('43%')
 
       //协议
-      Row(){
+      Row() {
         Checkbox()
           .width(15)
         Text('勾选此处同意《会员使用协议》')

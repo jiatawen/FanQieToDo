@@ -1,5 +1,9 @@
 {
   "src": [
-    "pages/Index"
+    "pages/Index",
+    "pages/Chen/Cloud",
+    "pages/Chen/Vip",
+    "pages/Chen/KeepTime",
+    "pages/Chen/Test"
   ]
 }

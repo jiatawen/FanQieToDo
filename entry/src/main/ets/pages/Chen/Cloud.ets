@@ -1,3 +1,5 @@
+import router from '@ohos.router';
+
 @Entry
 @Component
 //云存储页面
@@ -7,6 +9,10 @@ struct Cloud {
       Row(){
         Image($r('app.media.ic_close'))
           .width(30)
+          .onClick(()=>{
+            router.back()
+          })
+
       }.justifyContent(FlexAlign.Start)
       .width('100%')
       .margin({top:10})
