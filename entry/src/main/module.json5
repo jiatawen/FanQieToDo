@@ -40,6 +40,11 @@
       {
         "name": "ohos.permission.GET_NETWORK_INFO"
       }
+    ],
+    "requestPermissions":[
+      {
+        "name": "ohos.permission.INTERNET"
+      }
     ]
   }
 }
