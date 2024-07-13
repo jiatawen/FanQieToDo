@@ -1,17 +1,16 @@
 @Entry
 @Component
 struct Test {
-  @State message: string = 'Hello World'
-
   build() {
-    Row() {
-      Column() {
-        Text(this.message)
-          .fontSize(50)
-          .fontWeight(FontWeight.Bold)
-      }
-      .width('100%')
+    Column(){
     }
+    .width('100%')
     .height('100%')
+
+    .backgroundImage($r('app.media.bg_classroom'))
+    .backgroundImageSize({
+      height:100,
+      width:200
+    })
   }
 }
