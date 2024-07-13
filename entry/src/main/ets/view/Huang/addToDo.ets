@@ -11,9 +11,11 @@
   .textAlign(TextAlign.Center)
 }
 
-@Entry
-@Component
+@CustomDialog
 struct addToDo {
+  controller: CustomDialogController = new CustomDialogController({
+    builder: addToDo({}),
+  })
   @BuilderParam addType: () => void = this.muBiao
   @State jieZhiTime: string = '设定截止日期'
 
