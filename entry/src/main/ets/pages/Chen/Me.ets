@@ -1,5 +1,6 @@
 import { userTest } from '../../viewmodel/pojo/User'
 import router from '@ohos.router';
+import Store from '../Store'
 @Entry
 @Component
 struct Me {
@@ -42,9 +43,9 @@ struct Me {
           .width(80)
           .borderRadius(40)
         Column({ space: 20 }) {
-          Text(`账号:${userTest().UserEmail}`)
+          Text(`账号:${Store.getUser().UserEmail}`)
             .fontColor('#fff')
-          Text(`昵称;${userTest().UserName}`)
+          Text(`昵称;${Store.getUser().UserName}`)
             .fontColor('#fff')
         }
         .alignItems(HorizontalAlign.Start)

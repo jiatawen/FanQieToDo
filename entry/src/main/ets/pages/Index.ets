@@ -1,5 +1,7 @@
 import { Mine } from '../view/Chen/Mine'
 import { TodoList } from '../view/Huang/TodoList'
+import Statistics from './Chang/Statistics'
+import Store from '../pages/Store'
 
 @Entry
 @Component
@@ -32,7 +34,7 @@ struct Index {
       }.tabBar(this.TabDefault(1))
       // 统计数据
       TabContent() {
-        Text('页面')
+        Statistics()
       }.tabBar(this.TabDefault(2))
       // 我的
       TabContent() {

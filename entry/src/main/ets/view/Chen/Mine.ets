@@ -1,10 +1,11 @@
 import * as template from './template'
 import { TopTitle } from '../../pages/Index'
 import router from '@ohos.router'
+import Store from '../../pages/Store'
 /**
  * 我的页面
  */
-@Entry
+
 @Component
 export struct Mine {
   dialogController: CustomDialogController = new CustomDialogController({
@@ -110,7 +111,7 @@ export struct Mine {
  })
  */
 @CustomDialog
-struct CustomDialogExample {
+export default  struct CustomDialogExample {
   controller: CustomDialogController = new CustomDialogController({
     builder: CustomDialogExample({}),
   })
