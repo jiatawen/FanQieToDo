@@ -16,8 +16,8 @@ struct Register {
     let httpRequest = http.createHttp()
     httpRequest.request(
       // 填写HTTP请求的URL地址，可以带参数也可以不带参数。URL地址需要开发者自定义。请求的参数可以在extraData中指定
-      //"http://1.14.13.203:8888/api/user/register",
-      "http://127.0.0.1:8888/api/user/register",
+      "http://1.14.13.203:8888/api/user/register",
+      //"http://127.0.0.1:8888/api/user/register",
       {
         method: http.RequestMethod.POST, // 可选，默认为http.RequestMethod.GET
         // 当使用POST请求时此字段用于传递内容
