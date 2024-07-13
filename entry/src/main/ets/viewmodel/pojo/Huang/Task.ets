@@ -2,7 +2,7 @@ export class Task {
   TaskId: string//任务id
   UserId: string//用户id
   TaskTitle: string//任务名称
-  TaskTypeId: number//任务类型:0为普通番茄钟，1为
+  TaskTypeId: string//任务类型:0为普通番茄钟，1为
   TaskTimeType: number
   TaskTime: string
   SignalTime: number

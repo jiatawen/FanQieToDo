@@ -1,5 +1,6 @@
 import router from '@ohos.router';
 import http from '@ohos.net.http'
+import store from '../Store'
 
 
 // 数据统计
@@ -16,7 +17,8 @@ struct Statistics {
   @State totalJoinRoom: number = 0;
 
   getData(){
-    console.log('发送请求')
+    store.setToken('123')
+    console.log('Token' + store.getToken());
     let httpRequest = http.createHttp()
     httpRequest.request(
       // 填写HTTP请求的URL地址，可以带参数也可以不带参数。URL地址需要开发者自定义。请求的参数可以在extraData中指定

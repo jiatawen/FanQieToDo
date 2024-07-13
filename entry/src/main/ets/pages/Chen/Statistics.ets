@@ -1,8 +1,22 @@
 import router from '@ohos.router';
+import $http from '@ohos.net.http'
+
+
 // 季度卡购买页面
 @Entry
 @Component
-struct Vip {
+struct Statistics {
+
+
+  @State totalTask: number = 0;
+
+  onReady(){
+    this.totalTask = 10
+    console.log('123');
+  }
+
+
+
   @Builder
   VipTab() {
     Column({ space: 5 }) {
@@ -31,7 +45,7 @@ struct Vip {
           .onClick(() => {
             router.back()
           })
-        Text('番茄ToDo季度卡')
+        Text('数据统计')
           .fontWeight(700)
           .fontSize(20)
         Image($r('app.media.ic_help'))
@@ -43,11 +57,16 @@ struct Vip {
       //卡片
       Column() {
         Row() {
-          Text('0000 0000 0000 0000')
+          Text(`${ this.totalTask }`)
             .fontColor('#fff')
           Image($r('app.media.ic_picture'))
             .fillColor('#fff')
             .width(25)
+          Button('123')
+            .onClick(() => {
+              console.log('123');
+              this.totalTask++
+            })
         }
         .width('100%')
         .justifyContent(FlexAlign.SpaceBetween)
