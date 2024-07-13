@@ -1,4 +1,5 @@
 import { Mine } from '../view/Chen/Mine'
+import { TodoList } from '../view/Huang/TodoList'
 
 @Entry
 @Component
@@ -20,38 +21,33 @@ struct Index {
     }
   }
 
-  
-
   build() {
-    Column() {
-      //正文
-      Tabs() {
-        //待办
-        TabContent() {
-          Text('页面')
-        }.tabBar(this.TabDefault(0))
-        // 待办集
-        TabContent() {
-          Text('页面')
-        }.tabBar(this.TabDefault(1))
-        // 统计数据
-        TabContent() {
-          Text('页面')
-        }.tabBar(this.TabDefault(2))
-        // 我的
-        TabContent() {
-          Mine()
-        }.tabBar(this.TabDefault(3))
-      }
-      .layoutWeight(1)
-      .barPosition(BarPosition.End)
-      .scrollable(false)
-      .onChange((index) => {
-        this.selectedIndex = index
-      })
+    Tabs() {
+      //待办
+      TabContent() {
+        TodoList()
+      }.tabBar(this.TabDefault(0))
+      // 待办集
+      TabContent() {
+        Text('页面')
+      }.tabBar(this.TabDefault(1))
+      // 统计数据
+      TabContent() {
+        Text('页面')
+      }.tabBar(this.TabDefault(2))
+      // 我的
+      TabContent() {
+        Mine()
+      }.tabBar(this.TabDefault(3))
     }
+    .barPosition(BarPosition.End)
+    .scrollable(false)
+    .onChange((index) => {
+      this.selectedIndex = index
+    })
   }
 }
+
 
 //通用模板
 /**
@@ -97,6 +93,7 @@ export struct TopTitle {
       .alignItems(HorizontalAlign.Start)
 
       Blank()
+      //右侧图标按钮
       Row({ space: 15 }) {
         this.title()
       }
