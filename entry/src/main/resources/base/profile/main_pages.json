@@ -2,11 +2,13 @@
   "src": [
     "pages/Index",
     "pages/Chen/Cloud",
-    "pages/Chen/Vip",
+    "pages/Chen/Statistics",
     "pages/Chen/KeepTimeSetting",
     "pages/Chen/Test",
     "pages/Chen/Me",
     "pages/Chen/Help",
-    "pages/Chen/StudyRoomIndex"
+    "pages/Chen/StudyRoomIndex",
+    "pages/Chang/Login",
+    "pages/Chang/Register"
   ]
 }
