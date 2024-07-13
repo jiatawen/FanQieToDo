@@ -1,5 +1,6 @@
 import * as template from './template'
 import { TopTitle } from '../../pages/Index'
+import router from '@ohos.router'
 /**
  * 我的页面
  */
@@ -15,6 +16,7 @@ export struct Mine {
           Image($r('app.media.ic_help'))
             .fillColor('#fff')
             .width(30)
+            .onClick(()=>{router.pushUrl({url:'pages/Chen/Help'})})
           Image($r('app.media.ic_setting'))
             .fillColor('#fff')
             .width(30)

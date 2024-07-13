@@ -1,4 +1,4 @@
-import * as User from '../../viewmodel/pojo/Chen/User'
+import * as User from '../../viewmodel/pojo/User'
 import router from '@ohos.router';
 /**
  * 字体样式
@@ -25,7 +25,7 @@ export struct box {
   img: ResourceStr[] = [$r('app.media.ic_vip_clock'), $r('app.media.ic_cloud'), $r('app.media.ic_time'), $r('app.media.ic_picture'), $r('app.media.ic_four_box'), $r('app.media.ic_theme'), $r('app.media.ic_widgets'), $r('app.media.ic_setting_green'), $r('app.media.ic_help_blue'), $r('app.media.ic_share')]
   txt1: string[] = ['季度卡', '备份|恢复|云同步', '专注计时核心设置', '海报背景和外观', '自定义底栏模块', '主题颜色搭配', '桌面小组件选项', '其他设置', '帮助|常见问题', '分享给朋友们']
   txt2: string[] = ['众多新颖高级功能，助你养成专注好习惯', '', '铃声震动|专注格言|休息时长', '主界面和计时页面海报|待办卡片背景', '选择要在主界面展示的功能', '主题色|专注分布图配色', '小组件功能|背景图等', '语言设置等', '常见的使用问题和解决方案|隐私政策', '']
-  url: string[] = ['pages/Chen/Vip', 'pages/Chen/Cloud','pages/Chen/KeepTime']
+  url: string[] = ['pages/Chen/Vip', 'pages/Chen/Cloud', 'pages/Chen/KeepTime']
 
   build() {
     Row() {
@@ -72,7 +72,7 @@ export struct box {
     .backgroundColor('#fff')
     .onClick(() => {
       router.pushUrl({
-        url:this.url[this.i]
+        url: this.url[this.i]
       })
     })
   }
@@ -87,7 +87,7 @@ export function userTable(a: number = 11) {
   Column({ space: 5 }) {
     Row() {
       //用户头像
-      Image(User.userTest().uPortraits)
+      Image(User.userTest().UserImage)
         .width(56)
         .borderRadius(28)
       //皇冠
@@ -112,13 +112,18 @@ export function userTable(a: number = 11) {
     .width('100%')
 
     //用户昵称
-    Text(User.userTest().uName)
+    Text(User.userTest().UserName)
       .fontColor('#fff')
     //签名
-    Text(User.userTest().uSignature)
-      .fontColor('#fff')
-      .fontSize(10)
+    // Text(User.userTest().)
+    //   .fontColor('#fff')
+    //   .fontSize(10)
   }
+  .onClick(() => {
+    router.pushUrl({
+      url: 'pages/Chen/Me'
+    })
+  })
   .padding({
     left: 20,
     right: 20,
@@ -139,6 +144,7 @@ interface menuIconDemo {
   img: ResourceStr
   imgColor: ResourceColor
   txt: string
+  src:string
 }
 
 /**
@@ -147,9 +153,9 @@ interface menuIconDemo {
 @Builder
 export function menu() {
   Row() {
-    menuIcon({ img: $r('app.media.ic_daojishi'), imgColor: '#5bc7a5', txt: '未来倒计时' })
-    menuIcon({ img: $r('app.media.ic_history'), imgColor: '#49c4ff', txt: '专注历史记录' })
-    menuIcon({ img: $r('app.media.ic_zixishi'), imgColor: '#fd8584', txt: '自习室|许愿墙' })
+    menuIcon({ img: $r('app.media.ic_daojishi'), imgColor: '#5bc7a5', txt: '未来倒计时',src:'' })
+    menuIcon({ img: $r('app.media.ic_history'), imgColor: '#49c4ff', txt: '专注历史记录',src:'' })
+    menuIcon({ img: $r('app.media.ic_zixishi'), imgColor: '#fd8584', txt: '自习室|许愿墙',src:'pages/Chen/StudyRoomIndex' })
   }
   .padding(10)
   .height(65)
@@ -173,6 +179,9 @@ function menuIcon(demo: menuIconDemo) {
       .fontSize(10)
       .fontWeight(700)
   }
+  .onClick(()=>{
+    router.pushUrl({url:demo.src})
+  })
   .height('100%')
 }
 
