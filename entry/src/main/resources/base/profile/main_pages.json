@@ -8,6 +8,7 @@
     "pages/Chen/Me",
     "pages/Chen/Help",
     "pages/Chen/StudyRoomIndex",
-    "pages/Chang/Login"
+    "pages/Chang/Login",
+    "pages/Chang/Register"
   ]
 }

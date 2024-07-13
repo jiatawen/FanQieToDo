@@ -5,9 +5,10 @@ import store from '../Store'
 // 数据统计
 @Entry
 @Component
-struct Statistics {
+struct Register {
 
 
+  @State username: string = '';
   @State email: string = '';
   @State password: string = '';
 
@@ -15,35 +16,22 @@ struct Statistics {
     let httpRequest = http.createHttp()
     httpRequest.request(
       // 填写HTTP请求的URL地址，可以带参数也可以不带参数。URL地址需要开发者自定义。请求的参数可以在extraData中指定
-      "http://1.14.13.203:8888/api/user/login",
+      //"http://1.14.13.203:8888/api/user/register",
+      "http://127.0.0.1:8888/api/user/register",
       {
         method: http.RequestMethod.POST, // 可选，默认为http.RequestMethod.GET
-        // 开发者根据自身业务需要添加header字段
-        header: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYW5RaWUiLCJpZCI6MSwibmFtZSI6ImN4eSIsImV4cCI6MTcyMDkyMjAxNX0.8AXQie4R94a52yOUGdyWbNtBmTPH_EfyZbLuvJn9Ui4'
-        },
         // 当使用POST请求时此字段用于传递内容
         extraData: {
+          "username": this.username,
           "email": this.email,
           "password": this.password
         },
       }, (err, data) => {
       if (!err) {
         // data.result为HTTP响应内容，可根据业务需要进行解析
-        let resultObj = JSON.parse(data.result.toString());
-        store.setToken(resultObj.data.token)
-        store.setUser({
-          UserId: resultObj.data.id.toString(),
-          UserName: resultObj.data.username,
-          UserEmail: resultObj.data.email,
-          Password: '213',
-          UserImage: $r('app.media.p_user')
-        })
         router.pushUrl({
-          url:'pages/Index'
+          url:'pages/Chang/Login'
         })
-
-        console.log(JSON.stringify(store.getUser()));
       } else {
         // 当该请求使用完毕时，调用destroy方法主动销毁
         httpRequest.destroy();
@@ -55,13 +43,18 @@ struct Statistics {
     Column() {
       //导航栏
       Row() {
-        Text('登录')
+        Text('注册')
           .fontWeight(700)
           .fontSize(20)
       }
       .justifyContent(FlexAlign.Center)
       .width('100%')
       Column({ space: 10 }){
+        Row(){
+          TextInput({placeholder: '请输入用户名'})
+            .onChange((username) => this.username = username)
+            .backgroundColor('#FFF')
+        }
         Row(){
           TextInput({placeholder: '请输入邮箱'})
             .onChange((email) => this.email = email)
@@ -74,17 +67,17 @@ struct Statistics {
             .backgroundColor('#FFF')
         }
         Row(){
-          Button('登录')
+          Button('注册')
             .width(200)
             .onClick(() => this.login())
         }
         Row(){
-          Button('注册')
+          Button('已有账号？登录')
             .backgroundColor(Color.Gray)
             .width(200)
             .onClick(() => {
               router.pushUrl({
-                url:'pages/Chang/Register'
+                url:'pages/Chang/Login'
               })
             })
         }
