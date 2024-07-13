@@ -5,7 +5,7 @@ import store from '../Store'
 // 数据统计
 @Entry
 @Component
-struct Statistics {
+struct Login {
 
 
   @State email: string = '';
