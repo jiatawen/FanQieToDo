@@ -1,5 +1,5 @@
 import router from '@ohos.router';
-
+import promptAction from '@ohos.promptAction';
 /**
  * 番茄钟页面
  * 需传入time与title
@@ -21,6 +21,10 @@ struct FanQieClock {
     this.elapsedTime = router.getParams()?.['time'] as number
     this.totalTime = router.getParams()?.['time'] as number
     this.textTimerController.start()
+  }
+
+  onBackPress() {
+    promptAction.showToast({ message: '不能提前退出' })
   }
 
   build() {
@@ -57,6 +61,14 @@ struct FanQieClock {
             .onTimer((itc: number, elapsedTime: number) => {
               this.elapsedTime = this.totalTime - elapsedTime
               console.log('剩余时间', this.elapsedTime);
+              if (this.elapsedTime <= 0) {
+                router.replaceUrl({
+                  url: 'pages/huang/FanQieClock',
+                  params: {
+                    time: 5 * 60 * 1000,
+                    title: '休息'
+                  } })
+              }
             })
           //圆环
           Progress({ value: this.elapsedTime, total: this.totalTime, type: ProgressType.Ring })
@@ -121,7 +133,7 @@ struct FanQieClock {
       Image($r('app.media.ic_stop'))
         .width(30)
         .fillColor('#fff')
-        .onClick(()=>{
+        .onClick(() => {
           this.textTimerController.pause()
         })
       Image($r('app.media.ic_repeat'))
@@ -131,6 +143,9 @@ struct FanQieClock {
       Image($r('app.media.ic_end'))
         .width(30)
         .fillColor('#fff')
+        .onClick(() => {
+          router.replaceUrl({url:'pages/Index'})
+        })
     }
     .width('100%')
     .zIndex(0)

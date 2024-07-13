@@ -17,6 +17,7 @@ export struct TodoList {
     this.data.unshift()
   }
 
+
   dialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogExample({}),
     alignment: DialogAlignment.Center, // 可设置dialog的对齐方式，设定显示在底部或中间等，默认为底部显示
@@ -130,11 +131,11 @@ export struct TodoList {
               right: 10
             })
             .onClick(() => {
-              router.pushUrl({
-                url:'pages/huang/FanQieClock',
-                params:{
-                  time:10*60*1000,
-                  title:'测试用'
+              router.replaceUrl({
+                url: 'pages/huang/FanQieClock',
+                params: {
+                  time: 5 * 1000,
+                  title: '测试用'
                 }
               })
             })
