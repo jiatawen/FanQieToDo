@@ -39,7 +39,7 @@ struct Login {
           Password: '213',
           UserImage: $r('app.media.p_user')
         })
-        router.pushUrl({
+        router.replaceUrl({
           url:'pages/Index'
         })
 
