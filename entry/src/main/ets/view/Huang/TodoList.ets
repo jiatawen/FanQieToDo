@@ -69,7 +69,7 @@ export struct TodoList {
         .width('100%')
         .height(200)
         .justifyContent(FlexAlign.Center)
-        .backgroundColor('#ffffff')
+        .backgroundColor('#fffffff')
       }
       //待办任务项
       ForEach(taskTests(),(item:Task,index:number)=>{
