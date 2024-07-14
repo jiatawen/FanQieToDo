@@ -1,3 +1,5 @@
+import { Task } from '../../viewmodel/pojo/Task'
+
 @Extend(Text) function selectedTitle() {
   .height('100%')
   .layoutWeight(1)
@@ -13,12 +15,13 @@
 
 @CustomDialog
 export default struct addToDo {
-  controller: CustomDialogController = new CustomDialogController({
-    builder: addToDo({}),
-  })
+  controller:CustomDialogController
+  @Link tasks:Task[];
+  @State task:Task = new Task('T001', 'U001',  '编写报告1', '0', '0',10, 25, '每周', new Date('2001-10-10').getTime(), new Date('2010-10-10').getTime())
   @BuilderParam addType: () => void = this.muBiao
   @State jieZhiTime: string = '设定截止日期'
-  @State setMin:number = 25
+  @State setMin: number = 25
+
   @Builder xiGuan() {
     Column() {
       Row() {
@@ -66,7 +69,7 @@ export default struct addToDo {
               end: new Date('2100:12-31'),
               selected: new Date(Date.now()),
               onAccept: (value: DatePickerResult) => {
-                this.jieZhiTime = `${value.year}-${value.month+1}-${value.day}`
+                this.jieZhiTime = `${value.year}-${value.month + 1}-${value.day}`
               }
             })
           })
@@ -113,6 +116,12 @@ export default struct addToDo {
           .fontSize(20)
         Image($r('app.media.ic_correct'))
           .width(25)
+          .onClick(()=>{
+            this.tasks.push(this.task)
+            this.task.TaskTime = Math.floor(this.task.TaskTime)
+            console.log(JSON.stringify(this.tasks));
+            this.controller.close()
+          })
       }
       .backgroundColor('#eeeeee')
       .padding(8)
@@ -196,6 +205,11 @@ export default struct addToDo {
         .width('80%')
         .height(40)
         .margin({ bottom: 10 })
+        .onChange((value: string) => {
+          console.log(value);
+          this.task.TaskTitle = value
+          console.log(JSON.stringify(this.task));
+        })
 
       //中间部分
 
@@ -221,11 +235,12 @@ export default struct addToDo {
         .margin({ bottom: 10 })
 
         Row() {
-          Slider({ value: 25, min: 0, max: 180 ,step:1})
+          Slider({ value: 25, min: 0, max: 180, step: 1 })
             .width('70%')
             .showSteps(true)
-            .onChange((value:number)=>{
+            .onChange((value: number) => {
               this.setMin = value
+              this.task.TaskTime = value
             })
           Button(`${this.setMin}分钟`)
             .fontColor('#4a94ca')
@@ -246,15 +261,15 @@ export default struct addToDo {
 
 @Entry
 @Component
- struct Test {
-  dialogController: CustomDialogController = new CustomDialogController({
-    builder: addToDo()
-  })
+struct Test {
+  // dialogController: CustomDialogController = new CustomDialogController({
+  //   builder: addToDo()
+  // })
 
   build() {
     Button('点击按钮')
-      .onClick(()=>{
-        this.dialogController.open()
+      .onClick(() => {
+        // this.dialogController.open()
       })
   }
 }

@@ -2,13 +2,13 @@ import { Mine } from '../view/Chen/Mine'
 import { TodoList } from '../view/Huang/TodoList'
 import Statistics from './Chang/Statistics'
 import Store from '../pages/Store'
-
+import Clock from '../view/Chen/Clock'
 @Entry
 @Component
 struct Index {
   @State selectedIndex: number = 0 //被选中的标签号
-  tabBarsText: string[] = ['待办', '待办集', '统计数据', '我的'] //标签名
-  tabBarsImg: ResourceStr[] = [$r('app.media.ic_help'), $r('app.media.ic_help'), $r('app.media.ic_help'), $r('app.media.ic_person')] //标签图标
+  tabBarsText: string[] = ['待办', '锁机', '统计数据', '我的'] //标签名
+  tabBarsImg: ResourceStr[] = [$r('app.media.ic_todoList'), $r('app.media.ic_todoListSet'), $r('app.media.ic_dataConsume'), $r('app.media.ic_person')] //标签图标
   //标签模板
   @Builder
   TabDefault(TabIndex: number) {
@@ -30,7 +30,7 @@ struct Index {
       }.tabBar(this.TabDefault(0))
       // 待办集
       TabContent() {
-        Text('页面')
+        Clock()
       }.tabBar(this.TabDefault(1))
       // 统计数据
       TabContent() {

@@ -12,18 +12,18 @@ import topMenu from '../Chen/Mine'
 @Component
 export struct TodoList {
   @State data: Task[] = taskTests();
-
   onPageShow() {
     this.data.unshift()
   }
 
-
+  adToDo: CustomDialogController = new CustomDialogController({
+    builder: addToDo({
+      tasks:$data
+    }),
+  })
   dialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogExample({}),
     alignment: DialogAlignment.Center, // 可设置dialog的对齐方式，设定显示在底部或中间等，默认为底部显示
-  })
-  adTodo: CustomDialogController = new CustomDialogController({
-    builder: addToDo()
   })
   topMenu: CustomDialogController = new CustomDialogController({
     builder: topMenu(),
@@ -31,7 +31,7 @@ export struct TodoList {
     autoCancel: true,
     offset: { dx: -20, dy: 50 }
   })
-  @State i: number = Math.floor(Math.random() * 6)
+  @State i: number = Math.floor(Math.random() * 6 !)
   @State img: ResourceStr[] = [$r("app.media.bg_1"), $r("app.media.bg_2"), $r("app.media.bg_3"), $r("app.media.bg_4"), $r("app.media.bg_5")]
   // @State color: string[] = ["#8da6ddfa", "#88e57db4", "#abfaf7aa","#aaffffff","#aaffffff"]
   //打卡菜单
@@ -78,7 +78,7 @@ export struct TodoList {
             .fillColor('#fff')
             .width(30)
             .onClick(() => {
-              this.adTodo.open()
+              this.adToDo.open()
             })
           Image($r('app.media.ic_more'))
             .fillColor('#fff')
@@ -107,38 +107,47 @@ export struct TodoList {
         .backgroundColor('#fffffff')
       }
       //待办任务项
-      ForEach(taskTests(), (item: Task, index: number) => {
+      ForEach(this.data, (item: Task, index: number) => {
         Row() {
-          Column() {
-            Text(item.TaskTitle)
+          Row() {
+            Column() {
+              Text(item.TaskTitle)
+                .fontSize(20)
+                .fontFamily('STKaiti')
+                .lineHeight(30)
+                .fontColor('#fff')
+                .padding({
+                  left: 10
+                })
+              Text(item.TaskTime +'')
+                .lineHeight(30)
+                .fontColor('#fff')
+                .padding({
+                  left: 10
+                })
+            }
+
+            Blank()
+            Text("开始")
+              .fontColor('#fff')
               .fontSize(20)
-              .fontFamily('STKaiti')
-              .lineHeight(30)
               .padding({
-                left: 10
+                right: 10
               })
-            Text(item.SignalTime.toString())
-              .lineHeight(30)
-              .padding({
-                left: 10
+              .onClick(() => {
+                router.replaceUrl({
+                  url: 'pages/huang/FanQieClock',
+                  params: {
+                    time: Number(item.TaskTime) * 60 * 1000,
+                    title: item.TaskTitle
+                  }
+                })
               })
           }
-
-          Blank()
-          Text("开始")
-            .fontSize(20)
-            .padding({
-              right: 10
-            })
-            .onClick(() => {
-              router.replaceUrl({
-                url: 'pages/huang/FanQieClock',
-                params: {
-                  time: 5 * 1000,
-                  title: '测试用'
-                }
-              })
-            })
+          .width('100%')
+          .height('100%')
+          .backgroundColor('#52ffffff')
+          .borderRadius(10)
         }
         .height("10%")
         .width("90%")

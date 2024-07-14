@@ -37,5 +37,6 @@ export function taskTests() {
 
   return new Array<Task>(
     new Task('T001', 'U001',  '编写报告1', 0, 0,10, '120', '每周', new Date('2001-10-10').getTime(), new Date('2010-10-10').getTime()),
-    new Task('T002', 'U002',  '编写报告2', 1, 1,30, '120', '每月', new Date('2000-01-10').getTime(), new Date('2000-01-20').getTime()))
+    new Task('T002', 'U002',  '编写报告2', 1, 1,30, '120', '每月', new Date('2000-01-10').getTime(), new Date('2000-01-20').getTime()),
+    new Task('T003', 'U003',  '编写报告3', 1, 1,30, '120', '每月', new Date('2000-01-10').getTime(), new Date('2000-01-20').getTime()))
 }

@@ -14,7 +14,7 @@ struct Me {
           .onClick(() => {
             router.back()
           })
-        Text('专注计时设置')
+        Text('我')
           .fontColor('#fff')
           .fontSize(20)
           .margin({ left: 15 })

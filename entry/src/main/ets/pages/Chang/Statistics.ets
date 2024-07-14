@@ -27,7 +27,7 @@ export default struct Statistics {
         method: http.RequestMethod.GET, // 可选，默认为http.RequestMethod.GET
         // 开发者根据自身业务需要添加header字段
         header: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGYW5RaWUiLCJpZCI6MSwibmFtZSI6ImN4eSIsImV4cCI6MTcyMDkyMjAxNX0.8AXQie4R94a52yOUGdyWbNtBmTPH_EfyZbLuvJn9Ui4'
+          'Authorization': 'Bearer ' + store.getToken()
         },
       }, (err, data) => {
       if (!err) {
