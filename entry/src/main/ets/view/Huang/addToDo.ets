@@ -12,13 +12,13 @@
 }
 
 @CustomDialog
-struct addToDo {
+export default struct addToDo {
   controller: CustomDialogController = new CustomDialogController({
     builder: addToDo({}),
   })
   @BuilderParam addType: () => void = this.muBiao
   @State jieZhiTime: string = '设定截止日期'
-
+  @State setMin:number = 25
   @Builder xiGuan() {
     Column() {
       Row() {
@@ -66,7 +66,7 @@ struct addToDo {
               end: new Date('2100:12-31'),
               selected: new Date(Date.now()),
               onAccept: (value: DatePickerResult) => {
-                this.jieZhiTime = `${value.year}-${value.month}-${value.day}`
+                this.jieZhiTime = `${value.year}-${value.month+1}-${value.day}`
               }
             })
           })
@@ -221,10 +221,13 @@ struct addToDo {
         .margin({ bottom: 10 })
 
         Row() {
-          Slider({ value: 25, min: 0, max: 180 })
+          Slider({ value: 25, min: 0, max: 180 ,step:1})
             .width('70%')
             .showSteps(true)
-          Button('25分钟')
+            .onChange((value:number)=>{
+              this.setMin = value
+            })
+          Button(`${this.setMin}分钟`)
             .fontColor('#4a94ca')
             .backgroundColor('#f1f8fd')
         }
@@ -238,5 +241,20 @@ struct addToDo {
 
     }
     .borderRadius(10)
+  }
+}
+
+@Entry
+@Component
+ struct Test {
+  dialogController: CustomDialogController = new CustomDialogController({
+    builder: addToDo()
+  })
+
+  build() {
+    Button('点击按钮')
+      .onClick(()=>{
+        this.dialogController.open()
+      })
   }
 }

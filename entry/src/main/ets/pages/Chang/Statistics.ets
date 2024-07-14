@@ -6,7 +6,7 @@ import store from '../Store'
 // 数据统计
 @Entry
 @Component
-struct Statistics {
+export default struct Statistics {
 
 
   @State totalTask: number = 0;
@@ -96,7 +96,7 @@ struct Statistics {
       //卡片
       Column() {
         Row() {
-          Text('个人信息')
+          Text(`${store.getUser().UserName}`)
             .fontColor('#fff')
           Image($r('app.media.ic_picture'))
             .fillColor('#fff')

@@ -9,6 +9,7 @@
     "pages/Chen/Help",
     "pages/Chen/StudyRoomIndex",
     "pages/Chang/Login",
-    "pages/Chang/Register"
+    "pages/Chang/Register",
+    "pages/huang/FanQieClock"
   ]
 }

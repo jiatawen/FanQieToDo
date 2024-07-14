@@ -39,6 +39,9 @@ struct Register {
     }
     );
   }
+
+  inputController:TextInputController = new TextInputController()
+
   build() {
     Column() {
       //导航栏
@@ -51,7 +54,7 @@ struct Register {
       .width('100%')
       Column({ space: 10 }){
         Row(){
-          TextInput({placeholder: '请输入用户名'})
+          TextInput({placeholder: '请输入用户名',controller:this.inputController})
             .onChange((username) => this.username = username)
             .backgroundColor('#FFF')
         }

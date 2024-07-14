@@ -5,7 +5,7 @@ struct tips{
   build(){
     Column(){
       Row(){
-        Image($r('app.media.'))
+        // Image($r('app.media.'))
       }
       Text(this.tip)
     }

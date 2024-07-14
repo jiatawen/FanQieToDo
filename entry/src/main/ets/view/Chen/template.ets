@@ -1,5 +1,6 @@
 import * as User from '../../viewmodel/pojo/User'
 import router from '@ohos.router';
+import Store from '../../pages/Store'
 /**
  * 字体样式
  */
@@ -25,7 +26,7 @@ export struct box {
   img: ResourceStr[] = [$r('app.media.ic_vip_clock'), $r('app.media.ic_cloud'), $r('app.media.ic_time'), $r('app.media.ic_picture'), $r('app.media.ic_four_box'), $r('app.media.ic_theme'), $r('app.media.ic_widgets'), $r('app.media.ic_setting_green'), $r('app.media.ic_help_blue'), $r('app.media.ic_share')]
   txt1: string[] = ['季度卡', '备份|恢复|云同步', '专注计时核心设置', '海报背景和外观', '自定义底栏模块', '主题颜色搭配', '桌面小组件选项', '其他设置', '帮助|常见问题', '分享给朋友们']
   txt2: string[] = ['众多新颖高级功能，助你养成专注好习惯', '', '铃声震动|专注格言|休息时长', '主界面和计时页面海报|待办卡片背景', '选择要在主界面展示的功能', '主题色|专注分布图配色', '小组件功能|背景图等', '语言设置等', '常见的使用问题和解决方案|隐私政策', '']
-  url: string[] = ['pages/Chen/Vip', 'pages/Chen/Cloud', 'pages/Chen/KeepTime']
+  url: string[] = ['pages/Chen/Vip', 'pages/Chen/Cloud', 'pages/Chen/KeepTimeSetting']
 
   build() {
     Row() {
@@ -112,8 +113,9 @@ export function userTable(a: number = 11) {
     .width('100%')
 
     //用户昵称
-    Text(User.userTest().UserName)
+    Text(Store.getUser().UserName)
       .fontColor('#fff')
+      .padding({left:10})
     //签名
     // Text(User.userTest().)
     //   .fontColor('#fff')
