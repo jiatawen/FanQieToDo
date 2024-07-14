@@ -15,28 +15,35 @@ export struct TodoList {
   onPageShow() {
     this.data.unshift()
   }
-
+//构建三个自定义弹窗
+  //添加待办任务
   adToDo: CustomDialogController = new CustomDialogController({
     builder: addToDo({
       tasks:$data
     }),
   })
+
+  //打卡弹窗
   dialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogExample({}),
     alignment: DialogAlignment.Center, // 可设置dialog的对齐方式，设定显示在底部或中间等，默认为底部显示
   })
+
+  //更多菜单弹窗
   topMenu: CustomDialogController = new CustomDialogController({
     builder: topMenu(),
     alignment: DialogAlignment.TopEnd,
     autoCancel: true,
     offset: { dx: -20, dy: 50 }
   })
+  //随机下标
   @State i: number = Math.floor(Math.random() * 6 !)
+  //任务卡片背景数组
   @State img: ResourceStr[] = [$r("app.media.bg_1"), $r("app.media.bg_2"), $r("app.media.bg_3"), $r("app.media.bg_4"), $r("app.media.bg_5")]
   // @State color: string[] = ["#8da6ddfa", "#88e57db4", "#abfaf7aa","#aaffffff","#aaffffff"]
-  //打卡菜单
   now: Date = new Date
 
+  //构建打卡菜单组件
   @Builder
   MyMenu() {
     Menu() {
@@ -65,9 +72,11 @@ export struct TodoList {
     }.backgroundColor('#ffffff')
   }
 
+
+
   build() {
     Column({ space: 10 }) {
-      // 顶部导航栏
+      // 顶部导航栏右侧图标模板
       TopTitle({ titleText: '我的' }) {
         Row({ space: 20 }) {
           Image($r('app.media.ic_record'))
@@ -88,7 +97,7 @@ export struct TodoList {
             })
         }
       }
-      //如果是新用户
+      //如果是新用户，展示提示消息和空图标
       if (taskTests().length == 0) {
         Column() {
           Image($r('app.media.ic_empty'))
@@ -106,7 +115,7 @@ export struct TodoList {
         .justifyContent(FlexAlign.Center)
         .backgroundColor('#fffffff')
       }
-      //待办任务项
+      //待办任务项:foreach遍历对象数组实现列表效果
       ForEach(this.data, (item: Task, index: number) => {
         Row() {
           Row() {
@@ -128,12 +137,14 @@ export struct TodoList {
             }
 
             Blank()
+
             Text("开始")
               .fontColor('#fff')
               .fontSize(20)
               .padding({
                 right: 10
               })
+              //点击事件：跳转到番茄钟页面
               .onClick(() => {
                 router.replaceUrl({
                   url: 'pages/huang/FanQieClock',
@@ -151,6 +162,7 @@ export struct TodoList {
         }
         .height("10%")
         .width("90%")
+        //随机背景：通过生成随机下标来实现
         .backgroundImage(this.img[Math.floor(Math.random() * 5)])
         .borderRadius(10)
       })

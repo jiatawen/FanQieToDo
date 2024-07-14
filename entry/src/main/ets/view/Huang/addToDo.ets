@@ -1,5 +1,12 @@
 import { Task } from '../../viewmodel/pojo/Task'
 
+
+/*
+ * 添加任务弹窗
+ *
+*/
+
+// 番茄钟类型tab选中时字体样式
 @Extend(Text) function selectedTitle() {
   .height('100%')
   .layoutWeight(1)
@@ -8,11 +15,14 @@ import { Task } from '../../viewmodel/pojo/Task'
   .borderRadius(10)
 }
 
+//番茄钟类型tab未选中时字体样式
 @Extend(Text) function unselectedTitle() {
   .layoutWeight(1)
   .textAlign(TextAlign.Center)
 }
 
+
+//创建添加任务弹窗
 @CustomDialog
 export default struct addToDo {
   controller:CustomDialogController
@@ -22,6 +32,8 @@ export default struct addToDo {
   @State jieZhiTime: string = '设定截止日期'
   @State setMin: number = 25
 
+
+  //构建养习惯设置组件
   @Builder xiGuan() {
     Column() {
       Row() {
@@ -58,6 +70,7 @@ export default struct addToDo {
     .margin({ bottom: 10 })
   }
 
+  //构建定目标页面时间选择组件
   @Builder muBiao() {
     Column() {
       Row({ space: 10 }) {
@@ -107,7 +120,7 @@ export default struct addToDo {
 
   build() {
     Column() {
-      //表头
+      //顶部
       Row() {
         Image($r('app.media.ic_close'))
           .width(25)
@@ -116,11 +129,12 @@ export default struct addToDo {
           .fontSize(20)
         Image($r('app.media.ic_correct'))
           .width(25)
+          //点击事件：添加任务对象到任务数组
           .onClick(()=>{
             this.tasks.push(this.task)
             this.task.TaskTime = Math.floor(this.task.TaskTime)
             console.log(JSON.stringify(this.tasks));
-            this.controller.close()
+            this.controller.close()//关闭弹窗
           })
       }
       .backgroundColor('#eeeeee')
@@ -129,7 +143,8 @@ export default struct addToDo {
       .width('100%')
       .margin({ bottom: 10 })
 
-      // 按钮
+      // if else 实现tab切换样式
+      // 选中普通番茄钟
       Row() {
         if (this.selectedModel == 0) {
           Text('普通番茄钟')
@@ -150,6 +165,7 @@ export default struct addToDo {
               this.selectedModel = 2
             })
         }
+        // 选中定时番茄钟
         else if (this.selectedModel == 1) {
           Text('普通番茄钟')
             .unselectedTitle()
@@ -168,7 +184,9 @@ export default struct addToDo {
             .onClick(() => {
               this.selectedModel = 2
             })
-        } else if (this.selectedModel == 2) {
+        }
+        // 选中定目标番茄钟
+        else if (this.selectedModel == 2) {
           Text('普通番茄钟')
             .unselectedTitle()
             .onClick(() => {
@@ -219,7 +237,7 @@ export default struct addToDo {
       if (this.selectedModel == 2) {
         this.muBiao()
       }
-      //计时
+      //计时番茄钟
       Column() {
         Row({ space: 10 }) {
           Button('倒计时')
@@ -235,9 +253,11 @@ export default struct addToDo {
         .margin({ bottom: 10 })
 
         Row() {
+          //进度条滑动：默认值25，最大值180
           Slider({ value: 25, min: 0, max: 180, step: 1 })
             .width('70%')
             .showSteps(true)
+            //数据更新事件
             .onChange((value: number) => {
               this.setMin = value
               this.task.TaskTime = value
@@ -259,7 +279,6 @@ export default struct addToDo {
   }
 }
 
-@Entry
 @Component
 struct Test {
   // dialogController: CustomDialogController = new CustomDialogController({

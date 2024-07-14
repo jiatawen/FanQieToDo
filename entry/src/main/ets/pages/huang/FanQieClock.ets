@@ -6,7 +6,8 @@ import promptAction from '@ohos.promptAction';
  * 传入方式:router.pushUrl({url:'*****',params:{time:600000,title:'标题'}})
  * 时间单位为毫秒
  */
-@Entry
+
+//构建番茄钟组件
 @Component
 struct FanQieClock {
   textTimerController: TextTimerController = new TextTimerController()
@@ -25,6 +26,67 @@ struct FanQieClock {
 
   onBackPress() {
     promptAction.showToast({ message: '不能提前退出' })
+  }
+
+  //顶部菜单栏
+  @Builder
+  Top() {
+    Row({ space: 20 }) {
+      Blank()
+      Image($r('app.media.ic_scale'))
+        .width(30)
+        .fillColor('#fff')
+      Image($r('app.media.ic_revert'))
+        .width(30)
+        .fillColor('#fff')
+      Image($r('app.media.ic_share'))
+        .width(30)
+        .fillColor('#fff')
+      Image($r('app.media.ic_download'))
+        .width(30)
+        .fillColor('#fff')
+    }
+    .width('100%')
+  }
+
+  //底部菜单栏
+  @Builder
+  Bottom() {
+    Row() {
+      //底部菜单栏
+      Image($r('app.media.ic_light'))
+        .width(30)
+        .fillColor('#fff')
+      Column() {
+        Image($r('app.media.ic_media'))
+          .width(30)
+          .fillColor('#fff')
+        Image($r('app.media.ic_down'))
+          .width(30)
+          .fillColor('#fff')
+      }
+
+      Image($r('app.media.ic_stop'))
+        .width(30)
+        .fillColor('#fff')
+        .onClick(() => {
+          this.textTimerController.pause()
+        })
+      Image($r('app.media.ic_repeat'))
+        .width(30)
+        .fillColor('#fff')
+
+      Image($r('app.media.ic_end'))
+        .width(30)
+        .fillColor('#fff')
+        .onClick(() => {
+          router.replaceUrl({url:'pages/Index'})
+        })
+    }
+    .width('100%')
+    .zIndex(0)
+    .alignItems(VerticalAlign.Top)
+    .justifyContent(FlexAlign.SpaceAround)
   }
 
   build() {
@@ -92,64 +154,5 @@ struct FanQieClock {
     .width('100%')
     .height('100%')
     .backgroundImage($r('app.media.bg_3'))
-  }
-
-  @Builder
-  Top() {
-    Row({ space: 20 }) {
-      Blank()
-      Image($r('app.media.ic_scale'))
-        .width(30)
-        .fillColor('#fff')
-      Image($r('app.media.ic_revert'))
-        .width(30)
-        .fillColor('#fff')
-      Image($r('app.media.ic_share'))
-        .width(30)
-        .fillColor('#fff')
-      Image($r('app.media.ic_download'))
-        .width(30)
-        .fillColor('#fff')
-    }
-    .width('100%')
-  }
-
-  @Builder
-  Bottom() {
-    Row() {
-      //底部菜单栏
-      Image($r('app.media.ic_light'))
-        .width(30)
-        .fillColor('#fff')
-      Column() {
-        Image($r('app.media.ic_media'))
-          .width(30)
-          .fillColor('#fff')
-        Image($r('app.media.ic_down'))
-          .width(30)
-          .fillColor('#fff')
-      }
-
-      Image($r('app.media.ic_stop'))
-        .width(30)
-        .fillColor('#fff')
-        .onClick(() => {
-          this.textTimerController.pause()
-        })
-      Image($r('app.media.ic_repeat'))
-        .width(30)
-        .fillColor('#fff')
-
-      Image($r('app.media.ic_end'))
-        .width(30)
-        .fillColor('#fff')
-        .onClick(() => {
-          router.replaceUrl({url:'pages/Index'})
-        })
-    }
-    .width('100%')
-    .zIndex(0)
-    .alignItems(VerticalAlign.Top)
-    .justifyContent(FlexAlign.SpaceAround)
   }
 }

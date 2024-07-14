@@ -51,7 +51,7 @@ struct TopTitle {
 export struct CustomDialogExample {
   controller: CustomDialogController
   cancel: () => void //点击避障层退出时的回调
-  now: Date = new Date
+  now: Date = new Date//保存系统现在的数据
   @State systemTime: string = `${this.now.getHours()}:${this.now.getUTCMinutes() < 10 ? '0' + this.now.getUTCMinutes() : this.now.getUTCMinutes()}`
   @State systemDate: string = `${this.now.getFullYear()}年${this.now.getMonth() + 1}月${this.now.getDate()}日`
   @State titleText: string = '起床打卡'
@@ -60,6 +60,8 @@ export struct CustomDialogExample {
     Stack({ alignContent: Alignment.Top }) {
       //顶部导航栏
       TopTitle({ titleText: this.titleText })
+
+      //中间部分
       Column() {
         if (this.titleText == '起床打卡' || this.titleText == '睡眠打卡') {
           Row() {
@@ -106,7 +108,7 @@ export struct CustomDialogExample {
   }
 }
 
-@Entry
+//创建打卡弹窗组件
 @Component
 struct DialogExample {
   dialogController: CustomDialogController = new CustomDialogController({
